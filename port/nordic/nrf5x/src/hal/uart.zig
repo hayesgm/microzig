@@ -144,7 +144,7 @@ pub const UART = enum(u1) {
     fn set_txd(uart: UART, pin: gpio.Pin) void {
         const regs = uart.get_regs();
         switch (compatibility.chip) {
-            .nrf52 => regs.PSELTXD.raw = @intFromEnum(pin),
+            .nrf52832, .nrf52833 => regs.PSELTXD.raw = @intFromEnum(pin),
             .nrf52840 => regs.PSEL.TXD.write(.{
                 .PIN = pin.index(),
                 .PORT = pin.port(),
@@ -156,7 +156,7 @@ pub const UART = enum(u1) {
     fn set_rxd(uart: UART, pin: gpio.Pin) void {
         const regs = uart.get_regs();
         switch (compatibility.chip) {
-            .nrf52 => regs.PSELRXD.raw = @intFromEnum(pin),
+            .nrf52832, .nrf52833 => regs.PSELRXD.raw = @intFromEnum(pin),
             .nrf52840 => regs.PSEL.RXD.write(.{
                 .PIN = pin.index(),
                 .PORT = pin.port(),
@@ -168,7 +168,7 @@ pub const UART = enum(u1) {
     fn set_cts(uart: UART, pin: gpio.Pin) void {
         const regs = uart.get_regs();
         switch (compatibility.chip) {
-            .nrf52 => regs.PSELCTS.raw = @intFromEnum(pin),
+            .nrf52832, .nrf52833 => regs.PSELCTS.raw = @intFromEnum(pin),
             .nrf52840 => regs.PSEL.CTS.write(.{
                 .PIN = pin.index(),
                 .PORT = pin.port(),
@@ -180,7 +180,7 @@ pub const UART = enum(u1) {
     fn set_rts(uart: UART, pin: gpio.Pin) void {
         const regs = uart.get_regs();
         switch (compatibility.chip) {
-            .nrf52 => regs.PSELRTS.raw = @intFromEnum(pin),
+            .nrf52832, .nrf52833 => regs.PSELRTS.raw = @intFromEnum(pin),
             .nrf52840 => regs.PSEL.RTS.write(.{
                 .PIN = pin.index(),
                 .PORT = pin.port(),

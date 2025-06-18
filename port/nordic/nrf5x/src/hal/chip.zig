@@ -1,4 +1,5 @@
 pub const Chip = enum {
-    nrf52,
+    nrf52832,
+    nrf52833,
     nrf52840,
 };

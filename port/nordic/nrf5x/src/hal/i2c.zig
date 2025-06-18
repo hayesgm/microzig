@@ -102,7 +102,7 @@ pub const I2C = enum(u1) {
         config.scl_pin.set_direction(.in);
         config.scl_pin.set_drive_strength(.SOD1);
         switch (compatibility.chip) {
-            .nrf52 => regs.PSELSCL.raw = @intFromEnum(config.scl_pin),
+            .nrf52832, .nrf52833 => regs.PSELSCL.raw = @intFromEnum(config.scl_pin),
             .nrf52840 => regs.PSEL.SCL.write(.{
                 .PIN = config.scl_pin.index(),
                 .PORT = config.scl_pin.port(),
@@ -113,7 +113,7 @@ pub const I2C = enum(u1) {
         config.sda_pin.set_direction(.in);
         config.sda_pin.set_drive_strength(.SOD1);
         switch (compatibility.chip) {
-            .nrf52 => regs.PSELSDA.raw = @intFromEnum(config.sda_pin),
+            .nrf52832, .nrf52833 => regs.PSELSDA.raw = @intFromEnum(config.sda_pin),
             .nrf52840 => regs.PSEL.SDA.write(.{
                 .PIN = config.sda_pin.index(),
                 .PORT = config.sda_pin.port(),
@@ -138,7 +138,7 @@ pub const I2C = enum(u1) {
         regs.INTENSET.raw = 0x00000000;
         regs.ERRORSRC.raw = 0xFFFFFFFF;
         switch (compatibility.chip) {
-            .nrf52 => {
+            .nrf52832, .nrf52833 => {
                 regs.PSELSCL.raw = 0xFFFFFFFF;
                 regs.PSELSDA.raw = 0xFFFFFFFF;
             },

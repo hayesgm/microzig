@@ -106,7 +106,7 @@ pub const I2C = enum(u1) {
         config.scl_pin.set_direction(.in);
         config.scl_pin.set_drive_strength(.SOD1);
         switch (compatibility.chip) {
-            .nrf52 => regs.PSEL.SCL.write(.{
+            .nrf52832, .nrf52833 => regs.PSEL.SCL.write(.{
                 .PIN = config.scl_pin.index(),
                 .CONNECT = .Connected,
             }),
@@ -120,7 +120,7 @@ pub const I2C = enum(u1) {
         config.sda_pin.set_direction(.in);
         config.sda_pin.set_drive_strength(.SOD1);
         switch (compatibility.chip) {
-            .nrf52 => regs.PSEL.SDA.write(.{
+            .nrf52832, .nrf52833 => regs.PSEL.SDA.write(.{
                 .PIN = config.sda_pin.index(),
                 .CONNECT = .Connected,
             }),

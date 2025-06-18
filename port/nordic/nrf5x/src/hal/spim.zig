@@ -40,7 +40,7 @@ const Config = struct {
 };
 
 const Frequency = switch (compatibility.chip) {
-    .nrf52 => enum { @"125KHz", @"250KHz", @"500KHz", @"1MHz", @"2MHz", @"4MHz", @"8MHz" },
+    .nrf52832, .nrf52833 => enum { @"125KHz", @"250KHz", @"500KHz", @"1MHz", @"2MHz", @"4MHz", @"8MHz" },
     .nrf52840 => enum { @"125KHz", @"250KHz", @"500KHz", @"1MHz", @"2MHz", @"4MHz", @"8MHz", @"16MHz", @"32MHz" },
 };
 

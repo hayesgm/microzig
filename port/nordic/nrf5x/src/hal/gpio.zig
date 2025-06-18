@@ -35,7 +35,7 @@ pub const Pin = enum(u6) {
 
     fn get_regs(pin: Pin) @TypeOf(peripherals.P0) {
         return switch (compatibility.chip) {
-            .nrf52 => peripherals.P0,
+            .nrf52832, .nrf52833 => peripherals.P0,
             .nrf52840 => if (@intFromEnum(pin) <= 31)
                 peripherals.P0
             else
